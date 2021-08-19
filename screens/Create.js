@@ -2,6 +2,7 @@ import React from 'react'
 import { View, Text, StyleSheet, Platform, StatusBar, SafeAreaView, Image, TextInput, KeyboardAvoidingView } from 'react-native'
 import { RFValue } from 'react-native-responsive-fontsize'
 import DropDownPicker from 'react-native-dropdown-picker';
+import { ScrollView } from 'react-native-gesture-handler';
 
 export default class CreaterSpace extends React.Component {
 
@@ -29,73 +30,80 @@ export default class CreaterSpace extends React.Component {
         }
 
         return (
-            <KeyboardAvoidingView style={styles.view}>
+            <View style={{ flex: 1, backgroundColor: 'black' }}>
                 <SafeAreaView
                     style={styles.safeArea}
-                />
-                <View style={styles.header}>
-                    <View style={styles.iconView}>
-                        <Image source={require('../assets/logo.png')} style={styles.image} />
-                    </View>
-                    <View style={styles.textView}>
-                        <Text style={styles.text}>New Post</Text>
-                    </View>
-                </View>
-                <View style={styles.content}>
-                    <Image source={image_post[this.state.image]} style={styles.selectImage} />
-                </View>
-                <View style={{ height: RFValue(this.state.dropdownHeight) }}>
-                    <DropDownPicker
-                        items=
-                        {
-                            [
-                                { label: 'Image 1', value: 'image1' },
-                                { label: 'Image 2', value: 'image2' },
-                                { label: 'Image 3', value: 'image3' },
-                                { label: 'Image 4', value: 'image4' },
-                                { label: 'Image 5', value: 'image5' },
-                                { label: 'Image 6', value: 'image6' },
-                                { label: 'Image 7', value: 'image7' },
-                            ]
-                        }
-                        onChangeItem={(item) => {
-                            this.setState({ image: item.value })
-                        }
-                        }
-                        value={this.state.image}
-                        containerStyle={styles.containerstyle}
-                        style={styles.drop}
-                        dropDownStyle={styles.downstyle}
-                        labelStyle={styles.stylelabel}
-                        itemStyle={styles.styleitem}
-                        onOpen={() => {
-                            this.setState({ dropdownHeight: 170 });
-                        }}
-                        onClose={() => {
-                            this.setState({ dropdownHeight: 40 });
-                        }}
-                    />
-                </View>
+                >
+                    <ScrollView style={{ backgroundColor: 'black' }}>
+                        <KeyboardAvoidingView style={styles.view}
+                            behavior={'padding'}
+                        >
+                            <View style={styles.header}>
+                                <View style={styles.iconView}>
+                                    <Image source={require('../assets/logo.png')} style={styles.image} />
+                                </View>
+                                <View style={styles.textView}>
+                                    <Text style={styles.text}>New Post</Text>
+                                </View>
+                            </View>
+                            <View style={styles.content}>
+                                <Image source={image_post[this.state.image]} style={styles.selectImage} />
+                            </View>
+                            <View style={{ height: RFValue(this.state.dropdownHeight) }}>
+                                <DropDownPicker
+                                    items=
+                                    {
+                                        [
+                                            { label: 'Image 1', value: 'image1' },
+                                            { label: 'Image 2', value: 'image2' },
+                                            { label: 'Image 3', value: 'image3' },
+                                            { label: 'Image 4', value: 'image4' },
+                                            { label: 'Image 5', value: 'image5' },
+                                            { label: 'Image 6', value: 'image6' },
+                                            { label: 'Image 7', value: 'image7' },
+                                        ]
+                                    }
+                                    onChangeItem={(item) => {
+                                        this.setState({ image: item.value })
+                                    }
+                                    }
+                                    value={this.state.image}
+                                    containerStyle={styles.containerstyle}
+                                    style={styles.drop}
+                                    dropDownStyle={styles.downstyle}
+                                    labelStyle={styles.stylelabel}
+                                    itemStyle={styles.styleitem}
+                                    onOpen={() => {
+                                        this.setState({ dropdownHeight: 170 });
+                                    }}
+                                    onClose={() => {
+                                        this.setState({ dropdownHeight: 40 });
+                                    }}
+                                />
+                            </View>
 
-                <TextInput
-                    placeholder={'Name'}
-                    onChangeText={x => {
-                        this.setState({ author: x })
-                    }}
-                    value={this.state.author}
-                    style={styles.authorInput}
-                    placeholderTextColor={'white'}
-                />
-                <TextInput
-                    placeholder={'Caption'}
-                    onChangeText={x => {
-                        this.setState({ caption: x })
-                    }}
-                    value={this.state.caption}
-                    style={[styles.authorInput, { marginTop: 15 }]}
-                    placeholderTextColor={'white'}
-                />
-            </KeyboardAvoidingView>
+                            <TextInput
+                                placeholder={'Name'}
+                                onChangeText={x => {
+                                    this.setState({ author: x })
+                                }}
+                                value={this.state.author}
+                                style={styles.authorInput}
+                                placeholderTextColor={'white'}
+                            />
+                            <TextInput
+                                placeholder={'Caption'}
+                                onChangeText={x => {
+                                    this.setState({ caption: x })
+                                }}
+                                value={this.state.caption}
+                                style={[styles.authorInput, { marginTop: 15 }]}
+                                placeholderTextColor={'white'}
+                            />
+                        </KeyboardAvoidingView>
+                    </ScrollView>
+                </SafeAreaView>
+            </View>
         )
 
     }
